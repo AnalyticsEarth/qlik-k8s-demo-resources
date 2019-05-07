@@ -9,3 +9,5 @@ dependencies:
     condition: postgresql.enabled
   - name: mongo
     condition: mongo.enabled
+  - name: mssqlserver
+    condition: mssqlserver.enabled

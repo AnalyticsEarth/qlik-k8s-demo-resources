@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mssqlserver.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "mssqlserver.name" . }}
+    helm.sh/chart: {{ include "mssqlserver.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 1433
+      protocol: TCP
+      name: sqlserver
+  selector:
+    app.kubernetes.io/name: {{ include "mssqlserver.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
