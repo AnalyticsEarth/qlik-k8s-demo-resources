@@ -1,0 +1,19 @@
+{{ if .Values.horizontalPodAutoscaler.enabled }}
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "{{ include "qlik2datarobot.fullname" . }}-hpa"
+  labels:
+    app.kubernetes.io/name: {{ include "qlik2datarobot.name" . }}
+    helm.sh/chart: {{ include "qlik2datarobot.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: {{ include "qlik2datarobot.fullname" . }}
+    apiVersion: "apps/v1beta1"
+  minReplicas: {{ .Values.horizontalPodAutoscaler.minReplicaCount }}
+  maxReplicas: {{ .Values.horizontalPodAutoscaler.maxReplicaCount }}
+  targetCPUUtilizationPercentage: {{ .Values.horizontalPodAutoscaler.targetCPUUtilizationPercentage }}
+{{ end }}

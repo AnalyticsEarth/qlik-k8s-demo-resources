@@ -1,0 +1,18 @@
+# Default values for qlik-k8s-demo-resources.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+sse2rserve:
+  enabled: true
+
+qlik2datarobot:
+  enabled: true
+
+qlikpytools:
+  enabled: true
+
+postgresql:
+  enabled: true
+
+mongo:
+  enabled: true

@@ -1,0 +1,11 @@
+dependencies:
+  - name: sse2rserve
+    condition: sse2rserve.enabled
+  - name: qlik2datarobot
+    condition: qlik2datarobot.enabled
+  - name: qlikpytools
+    condition: qlikpytools.enabled
+  - name: postgresql
+    condition: postgresql.enabled
+  - name: mongo
+    condition: mongo.enabled

@@ -1,0 +1,6 @@
+Qlik Kubernetes Demo Resources installed.
+> SSE2RSERVE: {{ .Values.sse2rserve.enabled }}
+> QLIK2DATAROBOT: {{ .Values.qlik2datarobot.enabled }}
+> QLIKPYTOOLS: {{ .Values.qlikpytools.enabled }}
+> POSTGRESQL: {{ .Values.postgresql.enabled }}
+> MONGO: {{ .Values.mongo.enabled }}

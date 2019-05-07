@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ include "postgresql.fullname" . }}-pv-volume
+  labels:
+    type: local
+    app: {{ include "postgresql.fullname" . }}
+spec:
+  storageClassName: {{ include "postgresql.fullname" . }}-sc
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "postgresql.fullname" . }}-pv-claim
+  labels:
+    app: {{ include "postgresql.fullname" . }}
+spec:
+  storageClassName: {{ include "postgresql.fullname" . }}-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sse2rserve.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "sse2rserve.name" . }}
+    helm.sh/chart: {{ include "sse2rserve.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 50051
+      protocol: TCP
+      name: qlik-sse-sse2rserve
+  selector:
+    app.kubernetes.io/name: {{ include "sse2rserve.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

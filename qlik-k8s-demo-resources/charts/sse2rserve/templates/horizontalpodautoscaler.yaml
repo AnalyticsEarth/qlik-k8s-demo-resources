@@ -1,0 +1,19 @@
+{{ if .Values.horizontalPodAutoscaler.enabled }}
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "{{ include "sse2rserve.fullname" . }}-hpa"
+  labels:
+    app.kubernetes.io/name: {{ include "sse2rserve.name" . }}
+    helm.sh/chart: {{ include "sse2rserve.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: {{ include "sse2rserve.fullname" . }}
+    apiVersion: "apps/v1beta1"
+  minReplicas: {{ .Values.horizontalPodAutoscaler.minReplicaCount }}
+  maxReplicas: {{ .Values.horizontalPodAutoscaler.maxReplicaCount }}
+  targetCPUUtilizationPercentage: {{ .Values.horizontalPodAutoscaler.targetCPUUtilizationPercentage }}
+{{ end }}

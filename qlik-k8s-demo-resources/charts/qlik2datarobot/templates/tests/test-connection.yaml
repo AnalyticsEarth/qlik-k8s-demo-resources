@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "qlik2datarobot.fullname" . }}-test-connection"
+  labels:
+    app.kubernetes.io/name: {{ include "qlik2datarobot.name" . }}
+    helm.sh/chart: {{ include "qlik2datarobot.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "qlik2datarobot.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
