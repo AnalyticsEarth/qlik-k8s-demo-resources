@@ -30,10 +30,10 @@ spec:
           volumeMounts:
             - name: {{ include "mongo.fullname" . }}-samples
               mountPath: /samples
-          #lifecycle:
-            #postStart:
-              #exec:
-                #command: ["/bin/sh", "-c", {{.Values.poststartcmd}}]
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", {{.Values.poststartcmd}}]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
