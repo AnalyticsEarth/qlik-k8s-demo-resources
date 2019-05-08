@@ -22,7 +22,13 @@ GO
 exec sp_addrolemember 'db_datareader',qliksense
 GO
 
+GRANT SELECT ON SCHEMA :: dbo TO qliksense WITH GRANT OPTION;
+GO
+
 USE AdventureWorksDW2017
 GO
 exec sp_addrolemember 'db_datareader',qliksense
+GO
+
+GRANT SELECT ON SCHEMA :: dbo TO qliksense WITH GRANT OPTION;
 GO
