@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  qlik-k8s-demo-resources:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-05-08T23:25:45.8651631+01:00
+    description: A Helm chart for Kubernetes
+    digest: 49d5b63c63d423d8612b210e6c9c2b03dde1097584ae731ea7e309f8edaffe88
+    name: qlik-k8s-demo-resources
+    urls:
+    - https://analyticsearth.github.io/qlik-k8s-demo-resources/qlik-k8s-demo-resources-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-05-08T23:25:45.8614021+01:00
