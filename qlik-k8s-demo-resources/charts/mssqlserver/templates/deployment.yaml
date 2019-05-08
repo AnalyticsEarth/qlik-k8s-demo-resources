@@ -19,15 +19,30 @@ spec:
         app.kubernetes.io/name: {{ include "mssqlserver.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-setup
+          image: busybox:latest
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [ "sh", "-c", "wget -P /sqldata https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2017.bak" ]
+          args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /sqldata
       containers:
         - name: {{ .Chart.Name }}-tools
           image: mcr.microsoft.com/mssql-tools:latest
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /sqldata
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: shared-data
+              mountPath: /sqldata
           ports:
             - name: sqlserver
               containerPort: 1433
@@ -46,6 +61,9 @@ spec:
               value: /var/opt/mssql/ldf
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: shared-data
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
