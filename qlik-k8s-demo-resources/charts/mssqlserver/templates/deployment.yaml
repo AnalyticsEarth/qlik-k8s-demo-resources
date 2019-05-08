@@ -37,6 +37,10 @@ spec:
           volumeMounts:
             - name: shared-data
               mountPath: /demodata
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/bash", "-c", "/demodata/install.sh"]
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
