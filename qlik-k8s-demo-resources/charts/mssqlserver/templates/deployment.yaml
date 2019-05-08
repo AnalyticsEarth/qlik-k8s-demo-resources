@@ -23,11 +23,11 @@ spec:
         - name: {{ .Chart.Name }}-setup
           image: busybox:latest
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: [ "sh", "-c", "wget -P /sqldata https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2017.bak" ]
+          command: [ "sh", "-c", "wget -P /demodata https://raw.githubusercontent.com/AnalyticsEarth/qlik-k8s-demo-resources/master/samples/mssql/init.sh && chmod +x /demodata/init.sh && /demodata/init.sh" ]
           args: [ "while true; do sleep 30; done;" ]
           volumeMounts:
             - name: shared-data
-              mountPath: /sqldata
+              mountPath: /demodata
       containers:
         - name: {{ .Chart.Name }}-tools
           image: mcr.microsoft.com/mssql-tools:latest
@@ -36,13 +36,13 @@ spec:
           args: [ "while true; do sleep 30; done;" ]
           volumeMounts:
             - name: shared-data
-              mountPath: /sqldata
+              mountPath: /demodata
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: shared-data
-              mountPath: /sqldata
+              mountPath: /demodata
           ports:
             - name: sqlserver
               containerPort: 1433
