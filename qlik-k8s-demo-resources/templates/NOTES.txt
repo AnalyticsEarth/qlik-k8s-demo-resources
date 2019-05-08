@@ -3,4 +3,5 @@ Qlik Kubernetes Demo Resources installed.
 > QLIK2DATAROBOT: {{ .Values.qlik2datarobot.enabled }}
 > QLIKPYTOOLS: {{ .Values.qlikpytools.enabled }}
 > POSTGRESQL: {{ .Values.postgresql.enabled }}
-> MONGO: {{ .Values.mongo.enabled }}
+> MONGODB: {{ .Values.mongo.enabled }}
+> MSSQLSERVER: {{ .Values.mssqlserver.enabled }}
