@@ -6,18 +6,19 @@ To add qlik-k8s-demo-resources to the cluster:
 
 If the helm release is called demotools then the following services are made available:
 Qlik Kubernetes Demo Resources installed:
-> SSE2RSERVE
-> QLIK2DATAROBOT
-> QLIKPYTOOLS
-> POSTGRESQL
-> MONGODB
-> MS SQL SERVER
-> APACHE DRILL
+- SSE2RSERVE
+- QLIK2DATAROBOT
+- QLIKPYTOOLS
+- POSTGRESQL
+- MONGODB
+- MS SQL SERVER
+- APACHE DRILL
 
 ********************************************************************************
 To add support for analytic connectors, include the following in
 your QSEoK configuration:
 
+```
 engine:
   analytics:
     connectors:
@@ -27,7 +28,7 @@ engine:
         url: "demotools-qlik2datarobot:50052,,20,2000"
       - name: "PyTools"
         url: "demotools-qlikpytools:50055,,20,0"
-
+```
 * Names may be different if you have manually changed these in your config
 
 Data sources are configured to only be accessible from within the Kubernetes
