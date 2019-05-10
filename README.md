@@ -14,6 +14,26 @@ Qlik Kubernetes Demo Resources installed:
 - MS SQL SERVER
 - APACHE DRILL
 
+Create a YAML values.yaml file where you can enable/disable a service, by default they are all enabled:
+ ```
+ sse2rserve:
+   enabled: true
+ qlik2datarobot:
+   enabled: true
+ qlikpytools:
+   enabled: true
+ postgresql:
+   enabled: true
+ mongo:
+   enabled: true
+ mssqlserver:
+   enabled: true
+   accepteula: "Y"
+ drill:
+   enabled: true
+```
+
+
 ********************************************************************************
 To add support for analytic connectors, include the following in
 your QSEoK configuration:
