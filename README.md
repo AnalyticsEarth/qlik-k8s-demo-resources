@@ -77,4 +77,4 @@ The following demo dataset are included:
     - AdventureWorks Data Warehouse demo database
 
 - Apache Drill
-  - Example dataset from Drill (TPC-H), this is only accessible with a query, for example: `SELECT * FROM dfs.``/opt/drill/sample-data/region.parquet``;`
+  - Example dataset from Drill (TPC-H), this is only accessible with a query, for example: `SELECT * FROM dfs.`/opt/drill/sample-data/region.parquet`;`
