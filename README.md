@@ -57,27 +57,31 @@ cluster and are not accessible from outside the cluster without port forwarding.
 The DNS address and ports for the services are as follows:
 
 PostgreSQL:
+```
 HOST: demotools-postgresql.default.svc.cluster.local
 PORT: 5432
 USER: qliksense
 PASSWORD: Qlik1234
-
+```
 MongoDB:
+```
 HOST: demotools-mongo.default.svc.cluster.local
 PORT: 27017
 No Authentication Required
-
+```
 MS SQL Server:
+```
 HOST: demotools-mssqlserver.default.svc.cluster.local
 PORT: 1433
 USER: sa
 PASSWORD: Qlik1234
-
+```
 Apache Drill:
+```
 HOST: demotools-drill.default.svc.cluster.local
 PORT: 31010
 No Authentication Required
-
+```
 ********************************************************************************
 The following demo dataset are included:
 - PostgreSQL:
