@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "drill.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "drill.name" . }}
+    helm.sh/chart: {{ include "drill.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: 8047
+    - name: userport
+      port: 31010
+    - name: controlport
+      port: 31011
+    - name: dataport
+      port: 31012
+  selector:
+    app.kubernetes.io/name: {{ include "drill.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zk-service
+  labels:
+    app.kubernetes.io/name: {{ include "drill.name" . }}-zk
+    helm.sh/chart: {{ include "drill.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: client
+      port: 2181
+    - name: server
+      port: 2888
+    - name: leader-election
+      port: 3888
+  selector:
+    app.kubernetes.io/name: {{ include "drill.name" . }}-zk
+    app.kubernetes.io/instance: {{ .Release.Name }}

@@ -20,3 +20,6 @@ mongo:
 mssqlserver:
   enabled: true
   accepteula: "Y"
+
+drill:
+  enabled: true

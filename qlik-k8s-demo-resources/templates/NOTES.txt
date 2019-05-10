@@ -4,4 +4,52 @@ Qlik Kubernetes Demo Resources installed.
 > QLIKPYTOOLS: {{ .Values.qlikpytools.enabled }}
 > POSTGRESQL: {{ .Values.postgresql.enabled }}
 > MONGODB: {{ .Values.mongo.enabled }}
-> MSSQLSERVER: {{ .Values.mssqlserver.enabled }}
+> MS SQL SERVER: {{ .Values.mssqlserver.enabled }}
+> APACHE DRILL: {{ .Values.drill.enabled }}
+
+********************************************************************************
+To add support for analytic connectors, include the following in
+your QSEoK configuration:
+
+engine:
+  analytics:
+    connectors:
+      - name: "R"
+        url: "{{ .Release.Name }}-sse2rserve:50051"
+      - name: "DataRobot"
+        url: "{{ .Release.Name }}-qlik2datarobot:50052,,20,2000"
+      - name: "PyTools"
+        url: "{{ .Release.Name }}-qlikpytools:50055,,20,0"
+
+* Names may be different if you have manually changed these in your config
+
+Data sources are configured to only be accessible from within the Kubernetes
+cluster and are not accessible from outside the cluster without port forwarding.
+
+The DNS address and ports for the services are as follows:
+{{ if .Values.postgresql.enabled }}
+PostgreSQL:
+HOST: {{ .Release.Name }}-postgresql.{{ .Release.Namespace }}.svc.cluster.local
+PORT: {{ .Values.postgresql.service.port }}
+USER: qliksense
+PASSWORD: Qlik1234
+{{ end }}
+{{ if .Values.mongo.enabled }}
+MongoDB:
+HOST: {{ .Release.Name }}-mongo.{{ .Release.Namespace }}.svc.cluster.local
+PORT: {{ .Values.mongo.service.port }}
+No Authentication Required
+{{ end }}
+{{ if .Values.mssqlserver.enabled }}
+MS SQL Server:
+HOST: {{ .Release.Name }}-mssqlserver.{{ .Release.Namespace }}.svc.cluster.local
+PORT: {{ .Values.mssqlserver.service.port }}
+USER: sa
+PASSWORD: Qlik1234
+{{ end }}
+{{ if .Values.drill.enabled }}
+Apache Drill:
+HOST: {{ .Release.Name }}-drill.{{ .Release.Namespace }}.svc.cluster.local
+PORT: 31010
+No Authentication Required
+{{ end }}

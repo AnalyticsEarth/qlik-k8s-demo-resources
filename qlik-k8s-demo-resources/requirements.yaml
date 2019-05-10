@@ -11,3 +11,5 @@ dependencies:
     condition: mongo.enabled
   - name: mssqlserver
     condition: mssqlserver.enabled
+  - name: drill
+    condition: drill.enabled
