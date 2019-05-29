@@ -1,0 +1,21 @@
+sse2rserve:
+  enabled: false
+
+qlik2datarobot:
+  enabled: false
+
+qlikpytools:
+  enabled: false
+
+postgresql:
+  enabled: true
+
+mongo:
+  enabled: false
+
+mssqlserver:
+  enabled: false
+  accepteula: "Y"
+
+drill:
+  enabled: false
