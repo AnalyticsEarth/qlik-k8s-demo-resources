@@ -10,6 +10,6 @@ dependencies:
   - name: mongo
     condition: mongo.enabled
   - name: mssqlserver
-    condition: mssqlserver.enabled
+    condition: mssqlserver.accepteula
   - name: drill
     condition: drill.enabled

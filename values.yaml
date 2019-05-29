@@ -1,21 +1,20 @@
 sse2rserve:
-  enabled: false
+  enabled: true
 
 qlik2datarobot:
-  enabled: false
+  enabled: true
 
 qlikpytools:
-  enabled: false
+  enabled: true
 
 postgresql:
-  enabled: false
+  enabled: true
 
 mongo:
   enabled: true
 
 mssqlserver:
-  enabled: false
-  accepteula: "Y"
+  accepteula: true
 
 drill:
-  enabled: false
+  enabled: true

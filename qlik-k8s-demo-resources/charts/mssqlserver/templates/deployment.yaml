@@ -30,8 +30,8 @@ spec:
               mountPath: /demodata
       containers:
         - name: {{ .Chart.Name }}-tools
-          image: mcr.microsoft.com/mssql-tools:latest
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.toolsimage.repository }}:{{ .Values.toolsimage.tag }}"
+          imagePullPolicy: {{ .Values.toolsimage.pullPolicy }}
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
           volumeMounts:
@@ -52,8 +52,10 @@ spec:
               containerPort: 1433
               protocol: TCP
           env:
+            {{if .Values.accepteula }}
             - name: ACCEPT_EULA
               value: "Y"
+            {{ end }}
             - name: SA_PASSWORD
               valueFrom:
                 secretKeyRef:

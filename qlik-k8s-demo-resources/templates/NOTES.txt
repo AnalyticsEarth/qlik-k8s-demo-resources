@@ -4,7 +4,7 @@ Qlik Kubernetes Demo Resources installed.
 > QLIKPYTOOLS: {{ .Values.qlikpytools.enabled }}
 > POSTGRESQL: {{ .Values.postgresql.enabled }}
 > MONGODB: {{ .Values.mongo.enabled }}
-> MS SQL SERVER: {{ .Values.mssqlserver.enabled }}
+> MS SQL SERVER: {{ .Values.mssqlserver.accepteula }}
 > APACHE DRILL: {{ .Values.drill.enabled }}
 
 ********************************************************************************
@@ -15,11 +15,11 @@ engine:
   analytics:
     connectors:
       - name: "R"
-        url: "{{ .Release.Name }}-sse2rserve:50051"
+        url: "{{ .Release.Name }}-sse2rserve.{{ .Release.Namespace }}.svc.cluster.local:50051"
       - name: "DataRobot"
-        url: "{{ .Release.Name }}-qlik2datarobot:50052,,20,2000"
+        url: "{{ .Release.Name }}-qlik2datarobot.{{ .Release.Namespace }}.svc.cluster.local:50052,,20,2000"
       - name: "PyTools"
-        url: "{{ .Release.Name }}-qlikpytools:50055,,20,0"
+        url: "{{ .Release.Name }}-qlikpytools.{{ .Release.Namespace }}.svc.cluster.local:50055,,20,0"
 
 * Names may be different if you have manually changed these in your config
 
@@ -40,7 +40,7 @@ HOST: {{ .Release.Name }}-mongo.{{ .Release.Namespace }}.svc.cluster.local
 PORT: {{ .Values.mongo.service.port }}
 No Authentication Required
 {{ end }}
-{{ if .Values.mssqlserver.enabled }}
+{{ if .Values.mssqlserver.accepteula }}
 MS SQL Server:
 HOST: {{ .Release.Name }}-mssqlserver.{{ .Release.Namespace }}.svc.cluster.local
 PORT: {{ .Values.mssqlserver.service.port }}

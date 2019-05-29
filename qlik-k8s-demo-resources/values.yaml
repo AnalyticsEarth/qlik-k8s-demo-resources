@@ -3,23 +3,22 @@
 # Declare variables to be passed into your templates.
 
 sse2rserve:
-  enabled: true
+  enabled: false
 
 qlik2datarobot:
-  enabled: true
+  enabled: false
 
 qlikpytools:
-  enabled: true
+  enabled: false
 
 postgresql:
-  enabled: true
+  enabled: false
 
 mongo:
-  enabled: true
+  enabled: false
 
 mssqlserver:
-  enabled: true
-  accepteula: "Y"
+  accepteula: false
 
 drill:
-  enabled: true
+  enabled: false

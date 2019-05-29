@@ -2,7 +2,7 @@ To add qlik-k8s-demo-resources to the cluster:
 
 1. `helm repo add demotools https://analyticsearth.github.io/qlik-k8s-demo-resources`
 1. `helm repo update`
-1. `helm upgrade --install demotools demotools/qlik-k8s-demo-resources`
+1. `helm upgrade --install --namespace demotools demotools demotools/qlik-k8s-demo-resources`
 
 If the helm release is called demotools then the following services are made available:
 Qlik Kubernetes Demo Resources installed:
@@ -27,7 +27,6 @@ Create a YAML values.yaml file where you can enable/disable a service, by defaul
  mongo:
    enabled: true
  mssqlserver:
-   enabled: true
    accepteula: "Y"
  drill:
    enabled: true
@@ -36,18 +35,18 @@ Create a YAML values.yaml file where you can enable/disable a service, by defaul
 
 ********************************************************************************
 To add support for analytic connectors, include the following in
-your QSEoK configuration:
+your QSEoK configuration: (presumes you have loaded demo tools into namespace demotools)
 
 ```
 engine:
   analytics:
     connectors:
       - name: "R"
-        url: "demotools-sse2rserve:50051"
+        url: "demotools-sse2rserve.demotools.svc.cluster.local:50051"
       - name: "DataRobot"
-        url: "demotools-qlik2datarobot:50052,,20,2000"
+        url: "demotools-qlik2datarobot.demotools.svc.cluster.local:50052,,20,2000"
       - name: "PyTools"
-        url: "demotools-qlikpytools:50055,,20,0"
+        url: "demotools-qlikpytools.demotools.svc.cluster.local:50055,,20,0"
 ```
 * Names may be different if you have manually changed these in your config
 
@@ -58,27 +57,27 @@ The DNS address and ports for the services are as follows:
 
 PostgreSQL:
 ```
-HOST: demotools-postgresql.default.svc.cluster.local
+HOST: demotools-postgresql.demotools.svc.cluster.local
 PORT: 5432
 USER: qliksense
 PASSWORD: Qlik1234
 ```
 MongoDB:
 ```
-HOST: demotools-mongo.default.svc.cluster.local
+HOST: demotools-mongo.demotools.svc.cluster.local
 PORT: 27017
 No Authentication Required
 ```
 MS SQL Server:
 ```
-HOST: demotools-mssqlserver.default.svc.cluster.local
+HOST: demotools-mssqlserver.demotools.svc.cluster.local
 PORT: 1433
 USER: sa
 PASSWORD: Qlik1234
 ```
 Apache Drill:
 ```
-HOST: demotools-drill.default.svc.cluster.local
+HOST: demotools-drill.demotools.svc.cluster.local
 PORT: 31010
 No Authentication Required
 ```

@@ -9,6 +9,11 @@ image:
   tag: 2017-latest
   pullPolicy: IfNotPresent
 
+toolsimage:
+  repository: mcr.microsoft.com/mssql-tools
+  tag: latest
+  pullPolicy: IfNotPresent
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -16,7 +21,7 @@ service:
   type: ClusterIP
   port: 1433
 
-accepteula: "N"
+accepteula: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
