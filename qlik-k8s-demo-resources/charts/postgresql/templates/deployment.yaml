@@ -42,10 +42,12 @@ spec:
           volumeMounts:
             - name: {{ include "postgresql.fullname" . }}-db
               mountPath: /var/lib/postgresql/data
+            - name: shared-data
+              mountPath: /demodata
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/bash", "-c", "/demodata/install.sh"]
+                command: ["/bin/sh", "-c", "/demodata/install.sh"]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
