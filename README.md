@@ -2,7 +2,7 @@ To add qlik-k8s-demo-resources to the cluster:
 
 1. `helm repo add demotools https://analyticsearth.github.io/qlik-k8s-demo-resources`
 1. `helm repo update`
-1. `helm upgrade --install --namespace demotools demotools demotools/qlik-k8s-demo-resources`
+1. `helm upgrade --install --namespace demotools demotools demotools/qlik-k8s-demo-resources -f values.yaml`
 
 If the helm release is called demotools then the following services are made available:
 Qlik Kubernetes Demo Resources installed:
@@ -14,7 +14,7 @@ Qlik Kubernetes Demo Resources installed:
 - MS SQL SERVER
 - APACHE DRILL
 
-Create a YAML values.yaml file where you can enable/disable a service, by default they are all enabled:
+Create a YAML values.yaml file where you can enable/disable a service, by default they are all disabled:
  ```
  sse2rserve:
    enabled: true
