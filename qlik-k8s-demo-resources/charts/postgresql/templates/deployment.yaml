@@ -31,8 +31,8 @@ spec:
             - configMapRef:
                 name: {{ include "postgresql.fullname" . }}-config
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: {{ include "postgresql.fullname" . }}-db
+            - name: {{ include "postgresql.fullname" . }}-db
+              mountPath: /var/lib/postgresql/data
             - name: {{ include "postgresql.fullname" . }}-samples
               mountPath: /samples
           lifecycle:
