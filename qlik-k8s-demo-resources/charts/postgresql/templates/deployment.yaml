@@ -19,6 +19,15 @@ spec:
         app.kubernetes.io/name: {{ include "postgresql.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-setup
+          image: busybox:latest
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [ "sh", "-c", "wget -P /demodata https://raw.githubusercontent.com/AnalyticsEarth/qlik-k8s-demo-resources/master/samples/postgres/init.sh && chmod +x /demodata/init.sh && /demodata/init.sh" ]
+          args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /demodata
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -33,21 +42,18 @@ spec:
           volumeMounts:
             - name: {{ include "postgresql.fullname" . }}-db
               mountPath: /var/lib/postgresql/data
-            - name: {{ include "postgresql.fullname" . }}-samples
-              mountPath: /samples
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", {{.Values.poststartcmd}}]
+                command: ["/bin/bash", "-c", "/demodata/install.sh"]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: {{ include "postgresql.fullname" . }}-db
           PersistentVolumeClaim:
             claimName: {{ include "postgresql.fullname" . }}-pv-claim
-        - name: {{ include "postgresql.fullname" . }}-samples
-          configMap:
-            name: {{ include "postgresql.fullname" . }}-data-config
+        - name: shared-data
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
