@@ -8,10 +8,10 @@ qlikpytools:
   enabled: false
 
 postgresql:
-  enabled: true
+  enabled: false
 
 mongo:
-  enabled: false
+  enabled: true
 
 mssqlserver:
   enabled: false

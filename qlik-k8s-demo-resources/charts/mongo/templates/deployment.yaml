@@ -19,6 +19,15 @@ spec:
         app.kubernetes.io/name: {{ include "mongo.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-setup
+          image: busybox:latest
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [ "sh", "-c", "wget -P /demodata https://raw.githubusercontent.com/AnalyticsEarth/qlik-k8s-demo-resources/master/samples/mongo/init.sh && chmod +x /demodata/init.sh && /demodata/init.sh" ]
+          args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /demodata
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -28,18 +37,17 @@ spec:
               containerPort: 27017
               protocol: TCP
           volumeMounts:
-            - name: {{ include "mongo.fullname" . }}-samples
-              mountPath: /samples
+            - name: shared-data
+              mountPath: /demodata
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", {{.Values.poststartcmd}}]
+                command: ["/bin/bash", "-c", "/demodata/install.sh"]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: {{ include "mongo.fullname" . }}-samples
-          configMap:
-            name: {{ include "mongo.fullname" . }}-data-config
+        - name: shared-data
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
