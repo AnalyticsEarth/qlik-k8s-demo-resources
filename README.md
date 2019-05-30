@@ -27,7 +27,7 @@ Create a YAML values.yaml file where you can enable/disable a service, by defaul
  mongo:
    enabled: true
  mssqlserver:
-   accepteula: "Y"
+   accepteula: true
  drill:
    enabled: true
 ```
