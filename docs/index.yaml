@@ -2,8 +2,17 @@ apiVersion: v1
 entries:
   qlik-k8s-demo-resources:
   - apiVersion: v1
+    appVersion: July 2019
+    created: 2019-07-22T12:58:40.1601744+01:00
+    description: A collection of demo resources for Qlik Sense Enterprise on Kubernetes
+    digest: ae865e2e216c82c7388c4d43f8c263a589982a9f9684810824f96092a39f4101
+    name: qlik-k8s-demo-resources
+    urls:
+    - https://analyticsearth.github.io/qlik-k8s-demo-resources/qlik-k8s-demo-resources-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v1
     appVersion: May 2019
-    created: 2019-05-29T15:01:35.443483+01:00
+    created: 2019-07-22T12:58:40.1590393+01:00
     description: A collection of demo resources for Qlik Sense Enterprise on Kubernetes
     digest: 285a8bab0e728ee502d7e67ee5aed392d910ab59e399b898612861bae5e32164
     name: qlik-k8s-demo-resources
@@ -12,7 +21,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: May 2019
-    created: 2019-05-29T15:01:35.4421151+01:00
+    created: 2019-07-22T12:58:40.157943+01:00
     description: A collection of demo resources for Qlik Sense Enterprise on Kubernetes
     digest: e5e5352e39ea71487c0fc67b24f52dff213f6e4964ea7b30e5ae043cca232db6
     name: qlik-k8s-demo-resources
@@ -21,11 +30,11 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-05-29T15:01:35.4370435+01:00
+    created: 2019-07-22T12:58:40.152884+01:00
     description: A Helm chart for Kubernetes
     digest: 49d5b63c63d423d8612b210e6c9c2b03dde1097584ae731ea7e309f8edaffe88
     name: qlik-k8s-demo-resources
     urls:
     - https://analyticsearth.github.io/qlik-k8s-demo-resources/qlik-k8s-demo-resources-0.1.0.tgz
     version: 0.1.0
-generated: 2019-05-29T15:01:35.3780636+01:00
+generated: 2019-07-22T12:58:40.1453112+01:00
