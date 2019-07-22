@@ -7,12 +7,12 @@ replicaCount: 1
 image:
   repository: mcr.microsoft.com/mssql/server
   tag: 2017-latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 toolsimage:
   repository: mcr.microsoft.com/mssql-tools
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
