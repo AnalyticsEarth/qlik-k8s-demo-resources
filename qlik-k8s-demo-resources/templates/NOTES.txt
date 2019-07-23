@@ -14,11 +14,14 @@ your QSEoK configuration:
 engine:
   analytics:
     connectors:
-      - name: "R"
+      R:
+        name: "R"
         url: "{{ .Release.Name }}-sse2rserve.{{ .Release.Namespace }}.svc.cluster.local:50051"
-      - name: "DataRobot"
+      DataRobot:
+        name: "DataRobot"
         url: "{{ .Release.Name }}-qlik2datarobot.{{ .Release.Namespace }}.svc.cluster.local:50052,,20,2000"
-      - name: "PyTools"
+      PyTools:
+        name: "PyTools"
         url: "{{ .Release.Name }}-qlikpytools.{{ .Release.Namespace }}.svc.cluster.local:50055,,20,0"
 
 * Names may be different if you have manually changed these in your config
