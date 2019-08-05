@@ -9,6 +9,8 @@ image:
   tag: latest
   pullPolicy: Always
 
+logLevel: Debug
+
 nameOverride: ""
 fullnameOverride: ""
 
