@@ -24,7 +24,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: LOG_LEVEL
+          - name: QLIK2DATAROBOT_LOG_LEVEL
             value: {{ .Values.logLevel }}
           ports:
             - name: qlik-sse
