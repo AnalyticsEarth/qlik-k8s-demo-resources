@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "sse2rserve.name" . }}
 data:
-  sse2rserve_rservePoolLimit: "5"
+  sse2rserve_rservePoolLimit: {{ .Values.poolLimit }}
 ---
 apiVersion: apps/v1
 kind: Deployment

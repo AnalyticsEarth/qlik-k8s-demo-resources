@@ -9,6 +9,8 @@ image:
   tag: latest
   pullPolicy: Always
 
+poolLimit: 1
+
 nameOverride: ""
 fullnameOverride: ""
 
