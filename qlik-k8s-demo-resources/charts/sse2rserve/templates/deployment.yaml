@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "sse2rserve.name" . }}
 data:
-  sse2rserve_rservePoolLimit: "{{ .Values.poolLimit }}"
+  sse2rserve_rservePoolNodes: "{{ .Values.poolNodes }}"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,10 +34,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: sse2rserve_rservePoolLimit
+            - name: sse2rserve_rservePoolNodes
               valueFrom:
                 configMapKeyRef:
-                  key: sse2rserve_rservePoolLimit
+                  key: sse2rserve_rservePoolNodes
                   name: {{ include "sse2rserve.fullname" . }}-config
           ports:
             - name: qlik-sse
