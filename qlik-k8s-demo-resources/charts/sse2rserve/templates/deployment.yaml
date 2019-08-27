@@ -30,9 +30,9 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: {{ .Chart.Name }}-connector
+          image: "{{ .Values.connector.image.repository }}:{{ .Values.connector.image.tag }}"
+          imagePullPolicy: {{ .Values.connector.image.pullPolicy }}
           env:
             - name: sse2rserve_rservePoolNodes
               valueFrom:
@@ -44,7 +44,12 @@ spec:
               containerPort: 50051
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.connector.resources | nindent 12 }}
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.rserve.image.repository }}:{{ .Values.rserve.image.tag }}"
+          imagePullPolicy: {{ .Values.rserve.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.rserve.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
