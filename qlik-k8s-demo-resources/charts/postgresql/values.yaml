@@ -14,7 +14,9 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 5432
+  ports:
+    - port: 5432
+      nodePort: 30432
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
